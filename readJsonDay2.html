@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
+    <script>
+    fetch('data.json').then(response => {
+            return response.json();
+        })
+        .then(myJson => {
+            //console.log(myJson);
+            let text
+            let row
+            let header
+            for (x in myJson) {
+                text = '<tr>'
+                header=''
+                for (r in myJson[x]){
+                    //console.log(myJson[x][r])          
+                    if (r != "company"){
+                        header = header +'<th>'+r+'</th>'   
+                        text = text +'<td>'+myJson[x][r]+'</td>'   
+                    }                                    
+                    //console.log(text)
+                }
+               text = text + '</tr>'         
+               row=row+text
+            }
+            //console.log(row);
+            $("#myTable").append(header);   
+            $("#myTable").append(row);            
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+ 
+    </script>
+
+    <script type="text/javascript" src="clonObj.js"></script>
+ 
+</head>
+<body>
+    <div >
+        <table  id="myTable">
+            
+       </table>
+          
+    </div>
+</body>
+</html>
