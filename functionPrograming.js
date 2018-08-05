@@ -4,19 +4,6 @@ fetch('data.json').then(response => {
 .then(myJson => {
     let peopleSalary = myJson
     let NewPeople = {}
-    function filterSalay(people) {
-        return (people.salary >= 100000);
-     }
-
-     function filterLowSalay(people) {
-        return (people.salary < 100000);
-     }
-     
-
-     function mapSalay (people) {   
-        people.salary = people.salary*2
-        return people ;
-      }
 
 
       function gentable(table) {
@@ -56,8 +43,16 @@ fetch('data.json').then(response => {
       console.log('cal salary old all  ' + SalayOld); 
       
     const peopleNew = peopleSalary
-    .filter(filterSalay)    
-    .map(mapSalay)
+    .filter(
+        (people) => people.salary >= 100000
+    )    
+
+    .map(
+        (people) => {
+            people.salary = people.salary*2
+            return people 
+          }
+    )
     console.log('cal people new ');     
     console.log(peopleNew);     
 
