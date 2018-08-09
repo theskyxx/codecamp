@@ -31,22 +31,23 @@ fetch('data.json').then(response => {
             $(tableName).append(row);   
         }
 
-      function reduleSalay (salay,people) {
+/*       function reduleSalay (salay,people) {
         return salay + Number(people.salary);
       }
-      
+       */
 
       gentable("myTableOld")
       
       const SalayOld = peopleSalary
-      .reduce(reduleSalay,0)  
+      .reduce( (salay,people)  => {
+        salay + Number(people.salary)
+      },0)  
       console.log('cal salary old all  ' + SalayOld); 
       
     const peopleNew = peopleSalary
     .filter(
         (people) => people.salary >= 100000
     )    
-
     .map(
         (people) => {
             people.salary = people.salary*2
@@ -65,7 +66,9 @@ fetch('data.json').then(response => {
     //onsole.log('cal salary new >= 10000.. ' + SalayNew);  
 
     const peoplNewSalay = peopleSalary     
-    .reduce(reduleSalay,0)  
+    .reduce((salay,people)  => {
+        salay + Number(people.salary)
+      },0)  
     console.log('cal salary new < 10000.. ' + peoplNewSalay);  
     //debugger
     let diff = peoplNewSalay-SalayOld
